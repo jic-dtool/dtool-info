@@ -48,19 +48,25 @@ def diff(dataset_uri, reference_dataset_uri):
     ds = DataSet.from_uri(dataset_uri)
     ref_ds = DataSet.from_uri(reference_dataset_uri)
 
+    num_items = len(list(ref_ds.identifiers))
+
     ids_diff = diff_identifiers(ds, ref_ds)
     if len(ids_diff) > 0:
         echo_header("identifiers", ds.name, ref_ds.name, "present")
         echo_diff(ids_diff)
         sys.exit(1)
 
-    sizes_diff = diff_sizes(ds, ref_ds)
+    with click.progressbar(length=num_items,
+                           label="Comparing sizes") as progressbar:
+        sizes_diff = diff_sizes(ds, ref_ds, progressbar)
     if len(sizes_diff) > 0:
         echo_header("sizes", ds.name, ref_ds.name, "size")
         echo_diff(sizes_diff)
         sys.exit(2)
 
-    content_diff = diff_content(ds, ref_ds)
+    with click.progressbar(length=num_items,
+                           label="Comparing hashes") as progressbar:
+        content_diff = diff_content(ds, ref_ds, progressbar)
     if len(content_diff) > 0:
         echo_header("content", ds.name, ref_ds.name, "hash")
         echo_diff(content_diff)
