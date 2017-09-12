@@ -11,6 +11,7 @@ she_dataset_uri = "file://" + os.path.join(SAMPLE_DATASETS, "she")
 cat_dataset_uri = "file://" + os.path.join(SAMPLE_DATASETS, "cat")
 lion_dataset_uri = "file://" + os.path.join(SAMPLE_DATASETS, "lion")
 
+
 def test_dataset_diff_functional():
 
     from dtool_info.dataset import diff

@@ -35,6 +35,11 @@ def diff(dataset_uri, reference_dataset_uri):
     dataset.
     """
 
+    def echo_header(desc, ds_name, ref_ds_name, prop):
+        click.secho("Different {}".format(desc), fg="red")
+        click.secho("ID, {} in '{}', {} in '{}'".format(
+            prop, ds_name, prop, ref_ds_name))
+
     def echo_diff(diff):
         for d in diff:
             line = "{}, {}, {}".format(d[0], d[1], d[2])
@@ -45,22 +50,18 @@ def diff(dataset_uri, reference_dataset_uri):
 
     ids_diff = diff_identifiers(ds, ref_ds)
     if len(ids_diff) > 0:
-        click.secho("Different identifiers", fg="red")
-        click.secho(
-            "ID, present in '{}', present in '{}'".format(ds.name, ref_ds.name))
+        echo_header("identifiers", ds.name, ref_ds.name, "present")
         echo_diff(ids_diff)
         sys.exit(1)
 
     sizes_diff = diff_sizes(ds, ref_ds)
     if len(sizes_diff) > 0:
-        click.secho("Different sizes", fg="red")
-        click.secho("ID, size in '{}', size in '{}'".format(ds.name, ref_ds.name))
+        echo_header("sizes", ds.name, ref_ds.name, "size")
         echo_diff(sizes_diff)
         sys.exit(2)
 
     content_diff = diff_content(ds, ref_ds)
     if len(content_diff) > 0:
-        click.secho("Different content", fg="red")
-        click.secho("ID, hash in '{}', hash in '{}'".format(ds.name, ref_ds.name))
+        echo_header("content", ds.name, ref_ds.name, "hash")
         echo_diff(content_diff)
         sys.exit(3)
