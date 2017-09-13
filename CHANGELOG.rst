@@ -10,8 +10,6 @@ This change log uses principles from `keep a changelog <http://keepachangelog.co
 Added
 ^^^^^
 
-- Progress bar to ``dtool diff``
-
 
 Changed
 ^^^^^^^
@@ -33,8 +31,17 @@ Security
 ^^^^^^^^
 
 
-[0.1.0] 2017-09-12
-------------------
+[0.2.0] - 2017-09-13
+--------------------
+
+Added
+^^^^^
+
+- Progress bar to ``dtool diff``
+
+
+[0.1.0] - 2017-09-12
+--------------------
 
 Added
 ^^^^^
