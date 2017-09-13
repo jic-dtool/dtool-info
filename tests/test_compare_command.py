@@ -27,8 +27,8 @@ def test_dataset_diff_functional():
 
     result = runner.invoke(diff, [cat_dataset_uri, lion_dataset_uri])
     assert result.exit_code == 2
-    assert result.output.startswith("Different sizes")
+    assert result.output.find("Different sizes") != -1
 
     result = runner.invoke(diff, [cat_dataset_uri, she_dataset_uri])
     assert result.exit_code == 3
-    assert result.output.startswith("Different content")
+    assert result.output.find("Different content") != -1
