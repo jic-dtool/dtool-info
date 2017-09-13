@@ -2,6 +2,7 @@
 *.swp
 *.egg-info
 
+.tox
 .cache
 .coverage
 .eggs
