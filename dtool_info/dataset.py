@@ -13,6 +13,8 @@ from dtoolcore.compare import (
 from dtool_cli.cli import (
     dataset_uri_argument,
     dataset_uri_validation,
+    storagebroker_validation,
+    CONFIG_PATH,
 )
 
 
@@ -71,3 +73,34 @@ def diff(dataset_uri, reference_dataset_uri):
         echo_header("content", ds.name, ref_ds.name, "hash")
         echo_diff(content_diff)
         sys.exit(3)
+
+
+@click.command()
+@click.argument("prefix", default="")
+@click.argument("storage", default="file", callback=storagebroker_validation)
+def ls(prefix, storage):
+    """Report list of dataset.
+
+    Proto datasets are highlighted in red.
+    """
+    storage_broker_lookup = dtoolcore._generate_storage_broker_lookup()
+    StorageBroker = storage_broker_lookup[storage]
+    info = []
+    for uri in StorageBroker.list_dataset_uris(prefix, CONFIG_PATH):
+        admin_metadata = dtoolcore._admin_metadata_from_uri(uri, CONFIG_PATH)
+        fg = None
+        if admin_metadata["type"] == "protodataset":
+            fg = "red"
+        info.append(dict(
+            name=admin_metadata["name"],
+            uuid=admin_metadata["uuid"],
+            uri=uri,
+            fg=fg)
+        )
+
+    name_max_len = max([len(i["name"]) for i in info])
+
+    for i in info:
+        i["width"] = name_max_len
+        line = "{uuid} - {name:{width}s} - {uri}".format(**i)
+        click.secho(line, fg=i["fg"])

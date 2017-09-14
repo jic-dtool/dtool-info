@@ -22,6 +22,7 @@ setup(
     entry_points={
         "dtool.cli": [
             "diff=dtool_info.dataset:diff",
+            "ls=dtool_info.dataset:ls",
         ],
     },
     download_url="{}/tarball/{}".format(url, version),
