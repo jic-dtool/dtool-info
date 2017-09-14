@@ -3,7 +3,7 @@
 import sys
 import click
 
-from dtoolcore import DataSet
+import dtoolcore
 from dtoolcore.compare import (
     diff_identifiers,
     diff_sizes,
@@ -45,8 +45,8 @@ def diff(dataset_uri, reference_dataset_uri):
             line = "{}, {}, {}".format(d[0], d[1], d[2])
             click.secho(line)
 
-    ds = DataSet.from_uri(dataset_uri)
-    ref_ds = DataSet.from_uri(reference_dataset_uri)
+    ds = dtoolcore.DataSet.from_uri(dataset_uri)
+    ref_ds = dtoolcore.DataSet.from_uri(reference_dataset_uri)
 
     num_items = len(list(ref_ds.identifiers))
 
