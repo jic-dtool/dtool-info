@@ -1,4 +1,4 @@
-"""Test the ``dtool dataset compare`` command."""
+"""Test the ``dtool diff`` command."""
 
 import os
 
