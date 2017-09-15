@@ -10,8 +10,6 @@ This change log uses principles from `keep a changelog <http://keepachangelog.co
 Added
 ^^^^^
 
-- ``dtool ls`` command
-
 
 Changed
 ^^^^^^^
@@ -31,6 +29,14 @@ Fixed
 
 Security
 ^^^^^^^^
+
+[0.3.0] - 2017-09-15
+--------------------
+
+Added
+^^^^^
+
+- ``dtool ls`` command
 
 
 [0.2.0] - 2017-09-13
