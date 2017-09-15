@@ -8,6 +8,7 @@ from . import SAMPLE_DATASETS
 
 lion_dataset_uri = "file://" + os.path.join(SAMPLE_DATASETS, "lion")
 
+
 def test_dataset_ls_functional():
 
     from dtoolcore import DataSet
