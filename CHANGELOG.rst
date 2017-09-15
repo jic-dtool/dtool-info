@@ -11,6 +11,8 @@ Added
 ^^^^^
 
 - ``dtool summary`` command
+- ``dtool item properties`` command
+- ``dtool item fetch`` command
 
 
 Changed
