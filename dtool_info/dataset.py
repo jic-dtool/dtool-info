@@ -168,6 +168,27 @@ def item():
 @item_identifier_argument
 def properties(dataset_uri, item_identifier):
     """Report item properties."""
+    dataset = validate_and_get_dataset(
+        dataset_uri,
+        "Cannot report item properties on a proto dataset"
+    )
+
+    props = dataset.item_properties(item_identifier)
+
+    json_lines = [
+        '{',
+        '  "relpath": "{}",'.format(props["relpath"]),
+        '  "size_in_bytes": {},'.format(props["size_in_bytes"]),
+        '  "utc_timestamp": {},'.format(props["utc_timestamp"]),
+        '  "hash": "{}"'.format(props["hash"]),
+        '}',
+    ]
+    formatted_json = "\n".join(json_lines)
+    colorful_json = pygments.highlight(
+        formatted_json,
+        pygments.lexers.JsonLexer(),
+        pygments.formatters.TerminalFormatter())
+    click.secho(colorful_json, nl=False)
 
 
 @item.command()
