@@ -98,6 +98,9 @@ def ls(prefix, storage):
             fg=fg)
         )
 
+    if len(info) == 0:
+        sys.exit(0)
+
     name_max_len = max([len(i["name"]) for i in info])
 
     for i in info:
