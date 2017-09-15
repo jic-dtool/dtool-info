@@ -79,7 +79,7 @@ def diff(dataset_uri, reference_dataset_uri):
 @click.argument("prefix", default="")
 @click.argument("storage", default="file", callback=storagebroker_validation)
 def ls(prefix, storage):
-    """Report list of dataset.
+    """List datasets in a location.
 
     Proto datasets are highlighted in red.
     """
