@@ -25,6 +25,7 @@ setup(
             "diff=dtool_info.dataset:diff",
             "ls=dtool_info.dataset:ls",
             "summary=dtool_info.dataset:summary",
+            "item=dtool_info.dataset:item",
         ],
     },
     download_url="{}/tarball/{}".format(url, version),

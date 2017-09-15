@@ -22,6 +22,8 @@ from dtool_cli.cli import (
     CONFIG_PATH,
 )
 
+item_identifier_argument = click.argument("item_identifier")
+
 
 @click.command()
 @dataset_uri_argument
@@ -148,3 +150,27 @@ def summary(dataset_uri):
         pygments.lexers.JsonLexer(),
         pygments.formatters.TerminalFormatter())
     click.secho(colorful_json, nl=False)
+
+
+@click.group()
+def item():
+    """
+    Get information about an item in the dataset.
+    """
+
+
+@item.command()
+@dataset_uri_argument
+@item_identifier_argument
+def properties(dataset_uri, item_identifier):
+    """Report item properties."""
+
+
+@item.command()
+@dataset_uri_argument
+@item_identifier_argument
+def fetch(dataset_uri, item_identifier):
+    """Return abspath to file with item content.
+
+    Fetches the file from remote storage if required.
+    """
