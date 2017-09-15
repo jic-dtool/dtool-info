@@ -25,6 +25,15 @@ from dtool_cli.cli import (
 item_identifier_argument = click.argument("item_identifier")
 
 
+def validate_and_get_dataset(dataset_uri, err_message, err_code=1):
+    try:
+        dataset = dtoolcore.DataSet.from_uri(dataset_uri)
+    except dtoolcore.DtoolCoreTypeError:
+        click.secho(err_message, fg="red", err=True)
+        sys.exit(err_code)
+    return dataset
+
+
 @click.command()
 @dataset_uri_argument
 @click.argument("reference_dataset_uri", callback=dataset_uri_validation)
@@ -120,15 +129,10 @@ def ls(prefix, storage):
 @dataset_uri_argument
 def summary(dataset_uri):
     """Report summary information about a dataset."""
-    try:
-        dataset = dtoolcore.DataSet.from_uri(dataset_uri)
-    except dtoolcore.DtoolCoreTypeError:
-        click.secho(
-            "Cannot report summary information on a proto dataset",
-            fg="red",
-            err=True
-        )
-        sys.exit(1)
+    dataset = validate_and_get_dataset(
+        dataset_uri,
+        "Cannot report summary information on a proto dataset"
+    )
 
     creator_username = dataset._admin_metadata["creator_username"]
     num_items = len(dataset.identifiers)
