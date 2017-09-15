@@ -4,6 +4,10 @@ import sys
 
 import click
 
+import pygments
+import pygments.lexers
+import pygments.formatters
+
 import dtoolcore
 from dtoolcore.compare import (
     diff_identifiers,
@@ -138,4 +142,9 @@ def summary(dataset_uri):
         '  "size_in_bytes": {}'.format(tot_size),
         '}',
     ]
-    click.secho("\n".join(json_lines))
+    formatted_json = "\n".join(json_lines)
+    colorful_json = pygments.highlight(
+        formatted_json,
+        pygments.lexers.JsonLexer(),
+        pygments.formatters.TerminalFormatter())
+    click.secho(colorful_json, nl=False)

@@ -18,6 +18,7 @@ setup(
         "click",
         "dtoolcore>=2.5.0",
         "dtool_cli",
+        "pygments",
     ],
     entry_points={
         "dtool.cli": [
