@@ -199,3 +199,9 @@ def fetch(dataset_uri, item_identifier):
 
     Fetches the file from remote storage if required.
     """
+    dataset = validate_and_get_dataset(
+        dataset_uri,
+        "Cannot report item properties on a proto dataset"
+    )
+
+    click.secho(dataset.item_content_abspath(item_identifier))

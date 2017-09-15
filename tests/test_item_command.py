@@ -37,9 +37,14 @@ def test_dataset_item_fetch_functional():
 
     from dtool_info.dataset import item
 
+    # Create expected output.
+    lion_ds = DataSet.from_uri(lion_dataset_uri)
+    expected = lion_ds.item_content_abspath(item_identifier)
+
     runner = CliRunner()
 
     result = runner.invoke(
         item,
         ["fetch", lion_dataset_uri, item_identifier])
     assert result.exit_code == 0
+    assert expected == result.output.strip()
