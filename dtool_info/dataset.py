@@ -1,6 +1,7 @@
 """Commands for getting information about datasets."""
 
 import sys
+
 import click
 
 import dtoolcore
@@ -107,3 +108,34 @@ def ls(prefix, storage):
         i["width"] = name_max_len
         line = "{uuid} - {name:{width}s} - {uri}".format(**i)
         click.secho(line, fg=i["fg"])
+
+
+@click.command()
+@dataset_uri_argument
+def summary(dataset_uri):
+    """Report summary information about a dataset."""
+    try:
+        dataset = dtoolcore.DataSet.from_uri(dataset_uri)
+    except dtoolcore.DtoolCoreTypeError:
+        click.secho(
+            "Cannot report summary information on a proto dataset",
+            fg="red",
+            err=True
+        )
+        sys.exit(1)
+
+    creator_username = dataset._admin_metadata["creator_username"]
+    num_items = len(dataset.identifiers)
+    tot_size = sum([dataset.item_properties(i)["size_in_bytes"]
+                    for i in dataset.identifiers])
+
+    json_lines = [
+        '{',
+        '  "name": "{}",'.format(dataset.name),
+        '  "uuid": "{}",'.format(dataset.uuid),
+        '  "creator_username": "{}",'.format(creator_username),
+        '  "number_of_items": {},'.format(num_items),
+        '  "size_in_bytes": {}'.format(tot_size),
+        '}',
+    ]
+    click.secho("\n".join(json_lines))

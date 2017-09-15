@@ -23,6 +23,7 @@ setup(
         "dtool.cli": [
             "diff=dtool_info.dataset:diff",
             "ls=dtool_info.dataset:ls",
+            "summary=dtool_info.dataset:summary",
         ],
     },
     download_url="{}/tarball/{}".format(url, version),
