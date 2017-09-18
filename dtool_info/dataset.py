@@ -127,6 +127,18 @@ def ls(prefix, storage):
 
 @click.command()
 @dataset_uri_argument
+def identifiers(dataset_uri):
+    """List the item identifiers in the dataset."""
+    dataset = validate_and_get_dataset(
+        dataset_uri,
+        "Cannot list identifiers in a proto dataset"
+    )
+    for i in dataset.identifiers:
+        click.secho(i)
+
+
+@click.command()
+@dataset_uri_argument
 def summary(dataset_uri):
     """Report summary information about a dataset."""
     dataset = validate_and_get_dataset(

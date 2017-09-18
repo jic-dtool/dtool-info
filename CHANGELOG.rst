@@ -10,6 +10,7 @@ This change log uses principles from `keep a changelog <http://keepachangelog.co
 Added
 ^^^^^
 
+- ``dtool identifiers`` command
 - ``dtool summary`` command
 - ``dtool item properties`` command
 - ``dtool item fetch`` command
