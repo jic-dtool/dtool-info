@@ -217,3 +217,53 @@ def fetch(dataset_uri, item_identifier):
     )
 
     click.secho(dataset.item_content_abspath(item_identifier))
+
+
+@item.command()
+@dataset_uri_argument
+def verify(dataset_uri):
+    """Return abspath to file with item content.
+
+    Fetches the file from remote storage if required.
+    """
+    dataset = validate_and_get_dataset(
+        dataset_uri,
+        "Cannot verify a proto dataset"
+    )
+    all_okay = True
+
+    generated_manifest = dataset.generate_manifest()
+    generated_identifiers = set(generated_manifest["items"].keys())
+    manifest_identifiers = set(dataset.identifiers)
+
+    for i in generated_identifiers.difference(manifest_identifiers):
+        message = "Unknown item: {} {}".format(
+            i,
+            generated_manifest["items"][i]["relpath"]
+        )
+        click.secho(message, fg="red")
+        all_okay = False
+
+    for i in manifest_identifiers.difference(generated_identifiers):
+        message = "Missing item: {} {}".format(
+            i,
+            dataset.item_properties(i)["relpath"]
+        )
+        click.secho(message, fg="red")
+        all_okay = False
+
+    for i in manifest_identifiers.intersection(generated_identifiers):
+        generated_hash = generated_manifest["items"][i]["hash"]
+        manifest_hash = dataset.item_properties(i)["hash"]
+        if generated_hash != manifest_hash:
+            message = "Altered item: {} {}".format(
+                i,
+                dataset.item_properties(i)["relpath"]
+            )
+            click.secho(message, fg="red")
+            all_okay = False
+
+    if not all_okay:
+        sys.exit(1)
+    else:
+        click.secho("All good :)", fg="green")

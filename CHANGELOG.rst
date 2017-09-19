@@ -12,6 +12,7 @@ Added
 
 - ``dtool identifiers`` command
 - ``dtool summary`` command
+- ``dtool verify`` command
 - ``dtool item properties`` command
 - ``dtool item fetch`` command
 
