@@ -31,6 +31,15 @@ Security
 ^^^^^^^^
 
 
+[0.4.1] - 2017-09-19
+--------------------
+
+Fixed
+^^^^^
+
+- ``verify`` no longer hanging off ``dtool item`` command
+
+
 [0.4.0] - 2017-09-19
 --------------------
 
