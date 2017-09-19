@@ -219,7 +219,7 @@ def fetch(dataset_uri, item_identifier):
     click.secho(dataset.item_content_abspath(item_identifier))
 
 
-@item.command()
+@click.command()
 @dataset_uri_argument
 def verify(dataset_uri):
     """Return abspath to file with item content.
