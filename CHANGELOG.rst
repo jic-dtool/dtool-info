@@ -10,12 +10,6 @@ This change log uses principles from `keep a changelog <http://keepachangelog.co
 Added
 ^^^^^
 
-- ``dtool identifiers`` command
-- ``dtool summary`` command
-- ``dtool verify`` command
-- ``dtool item properties`` command
-- ``dtool item fetch`` command
-
 
 Changed
 ^^^^^^^
@@ -35,6 +29,20 @@ Fixed
 
 Security
 ^^^^^^^^
+
+
+[0.4.0] - 2017-09-19
+--------------------
+
+Added
+^^^^^
+
+- ``dtool identifiers`` command
+- ``dtool summary`` command
+- ``dtool verify`` command
+- ``dtool item properties`` command
+- ``dtool item fetch`` command
+
 
 [0.3.0] - 2017-09-15
 --------------------
