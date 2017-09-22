@@ -147,6 +147,7 @@ def summary(dataset_uri):
     )
 
     creator_username = dataset._admin_metadata["creator_username"]
+    frozen_at = dataset._admin_metadata["frozen_at"]
     num_items = len(dataset.identifiers)
     tot_size = sum([dataset.item_properties(i)["size_in_bytes"]
                     for i in dataset.identifiers])
@@ -157,7 +158,8 @@ def summary(dataset_uri):
         '  "uuid": "{}",'.format(dataset.uuid),
         '  "creator_username": "{}",'.format(creator_username),
         '  "number_of_items": {},'.format(num_items),
-        '  "size_in_bytes": {}'.format(tot_size),
+        '  "size_in_bytes": {},'.format(tot_size),
+        '  "frozen_at": {}'.format(frozen_at),
         '}',
     ]
     formatted_json = "\n".join(json_lines)

@@ -27,6 +27,7 @@ def test_dataset_summary_functional():
         "number_of_items": len(lion_ds.identifiers),
         "size_in_bytes": tot_size,
         "creator_username": lion_ds._admin_metadata["creator_username"],
+        "frozen_at": lion_ds._admin_metadata["frozen_at"],
     }
 
     runner = CliRunner()
