@@ -25,15 +25,6 @@ from dtool_cli.cli import (
 item_identifier_argument = click.argument("item_identifier")
 
 
-def validate_and_get_dataset(dataset_uri, err_message, err_code=1):
-    try:
-        dataset = dtoolcore.DataSet.from_uri(dataset_uri)
-    except dtoolcore.DtoolCoreTypeError:
-        click.secho(err_message, fg="red", err=True)
-        sys.exit(err_code)
-    return dataset
-
-
 @click.command()
 @dataset_uri_argument
 @click.argument("reference_dataset_uri", callback=dataset_uri_validation)
@@ -129,10 +120,7 @@ def ls(prefix, storage):
 @dataset_uri_argument
 def identifiers(dataset_uri):
     """List the item identifiers in the dataset."""
-    dataset = validate_and_get_dataset(
-        dataset_uri,
-        "Cannot list identifiers in a proto dataset"
-    )
+    dataset = dtoolcore.DataSet.from_uri(dataset_uri)
     for i in dataset.identifiers:
         click.secho(i)
 
@@ -141,11 +129,7 @@ def identifiers(dataset_uri):
 @dataset_uri_argument
 def summary(dataset_uri):
     """Report summary information about a dataset."""
-    dataset = validate_and_get_dataset(
-        dataset_uri,
-        "Cannot report summary information on a proto dataset"
-    )
-
+    dataset = dtoolcore.DataSet.from_uri(dataset_uri)
     creator_username = dataset._admin_metadata["creator_username"]
     frozen_at = dataset._admin_metadata["frozen_at"]
     num_items = len(dataset.identifiers)
@@ -182,11 +166,7 @@ def item():
 @item_identifier_argument
 def properties(dataset_uri, item_identifier):
     """Report item properties."""
-    dataset = validate_and_get_dataset(
-        dataset_uri,
-        "Cannot report item properties on a proto dataset"
-    )
-
+    dataset = dtoolcore.DataSet.from_uri(dataset_uri)
     props = dataset.item_properties(item_identifier)
 
     json_lines = [
@@ -213,11 +193,7 @@ def fetch(dataset_uri, item_identifier):
 
     Fetches the file from remote storage if required.
     """
-    dataset = validate_and_get_dataset(
-        dataset_uri,
-        "Cannot report item properties on a proto dataset"
-    )
-
+    dataset = dtoolcore.DataSet.from_uri(dataset_uri)
     click.secho(dataset.item_content_abspath(item_identifier))
 
 
@@ -228,10 +204,7 @@ def verify(dataset_uri):
 
     Fetches the file from remote storage if required.
     """
-    dataset = validate_and_get_dataset(
-        dataset_uri,
-        "Cannot verify a proto dataset"
-    )
+    dataset = dtoolcore.DataSet.from_uri(dataset_uri)
     all_okay = True
 
     generated_manifest = dataset.generate_manifest()
