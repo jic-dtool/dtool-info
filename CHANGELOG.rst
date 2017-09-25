@@ -16,6 +16,9 @@ Added
 Changed
 ^^^^^^^
 
+- Better validation of dataset URI; proto dataset now return informative error
+  message instead of stack trace
+
 
 Deprecated
 ^^^^^^^^^^
