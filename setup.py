@@ -17,7 +17,7 @@ setup(
     install_requires=[
         "click",
         "dtoolcore>=2.8.0",
-        "dtool_cli",
+        "dtool_cli>=0.6.0",
         "pygments",
     ],
     entry_points={
