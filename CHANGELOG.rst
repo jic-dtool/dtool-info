@@ -10,14 +10,9 @@ This change log uses principles from `keep a changelog <http://keepachangelog.co
 Added
 ^^^^^
 
-- ``frozen_at`` to ``dtool summary`` command output
-
 
 Changed
 ^^^^^^^
-
-- Better validation of dataset URI; proto dataset now return informative error
-  message instead of stack trace
 
 
 Deprecated
@@ -34,6 +29,22 @@ Fixed
 
 Security
 ^^^^^^^^
+
+
+[0.5.0] - 2017-09-25
+--------------------
+
+Added
+^^^^^
+
+- ``frozen_at`` to ``dtool summary`` command output
+
+
+Changed
+^^^^^^^
+
+- Better validation of dataset URI; proto dataset now return informative error
+  message instead of stack trace
 
 
 [0.4.1] - 2017-09-19
