@@ -1,5 +1,6 @@
 """Commands for getting information about datasets."""
 
+import os
 import sys
 
 import click
@@ -92,6 +93,10 @@ def ls(prefix, storage):
     """
     storage_broker_lookup = dtoolcore._generate_storage_broker_lookup()
     StorageBroker = storage_broker_lookup[storage]
+
+    if storage == "file":
+        prefix = os.path.abspath(prefix)
+
     info = []
     for uri in StorageBroker.list_dataset_uris(prefix, CONFIG_PATH):
         admin_metadata = dtoolcore._admin_metadata_from_uri(uri, CONFIG_PATH)

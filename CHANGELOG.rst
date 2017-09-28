@@ -26,6 +26,8 @@ Removed
 Fixed
 ^^^^^
 
+- ``dtool ls`` now works with relative paths
+
 
 Security
 ^^^^^^^^
