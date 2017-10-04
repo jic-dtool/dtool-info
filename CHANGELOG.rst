@@ -26,11 +26,18 @@ Removed
 Fixed
 ^^^^^
 
-- ``dtool ls`` now works with relative paths
-
 
 Security
 ^^^^^^^^
+
+
+[0.5.1] - 2017-10-04
+--------------------
+
+Fixed
+^^^^^
+
+- ``dtool ls`` now works with relative paths
 
 
 [0.5.0] - 2017-09-25
