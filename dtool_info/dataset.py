@@ -27,14 +27,20 @@ item_identifier_argument = click.argument("item_identifier")
 
 
 @click.command()
+@click.option(
+    "-f",
+    "--full",
+    is_flag=True,
+    help="Include file hash comparisons."
+)
 @dataset_uri_argument
 @click.argument("reference_dataset_uri", callback=dataset_uri_validation)
-def diff(dataset_uri, reference_dataset_uri):
+def diff(full, dataset_uri, reference_dataset_uri):
     """Report the difference between two datasets.
 
     1. Checks that the identifiers are identicial
     2. Checks that the sizes are identical
-    3. Checks that the hashes are identical
+    3. Checks that the hashes are identical, if the '--full' option is used
 
     If a differences is detected in step 1, steps 2 and 3 will not be carried
     out. Similarly if a difference is detected in step 2, step 3 will not be
@@ -74,13 +80,14 @@ def diff(dataset_uri, reference_dataset_uri):
         echo_diff(sizes_diff)
         sys.exit(2)
 
-    with click.progressbar(length=num_items,
-                           label="Comparing hashes") as progressbar:
-        content_diff = diff_content(ds, ref_ds, progressbar)
-    if len(content_diff) > 0:
-        echo_header("content", ds.name, ref_ds.name, "hash")
-        echo_diff(content_diff)
-        sys.exit(3)
+    if full:
+        with click.progressbar(length=num_items,
+                               label="Comparing hashes") as progressbar:
+            content_diff = diff_content(ds, ref_ds, progressbar)
+        if len(content_diff) > 0:
+            echo_header("content", ds.name, ref_ds.name, "hash")
+            echo_diff(content_diff)
+            sys.exit(3)
 
 
 @click.command()

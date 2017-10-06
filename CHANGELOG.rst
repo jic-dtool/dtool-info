@@ -10,6 +10,8 @@ This change log uses principles from `keep a changelog <http://keepachangelog.co
 Added
 ^^^^^
 
+- ``-f/--full`` flag to ``dtool diff`` command to include checking of file
+  hashes  
 - ``-f/--full`` flag to ``dtool verify`` command to include checking of file
   hashes  
 
@@ -17,6 +19,7 @@ Added
 Changed
 ^^^^^^^
 
+- ``dtool diff`` now only compares identifiers and file sizes by default
 - ``dtool verify`` now only compares identifiers and file sizes by default
 
 
