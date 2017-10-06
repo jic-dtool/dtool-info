@@ -10,9 +10,14 @@ This change log uses principles from `keep a changelog <http://keepachangelog.co
 Added
 ^^^^^
 
+- ``-f/--full`` flag to ``dtool verify`` command to include checking of file
+  hashes  
+
 
 Changed
 ^^^^^^^
+
+- ``dtool verify`` now only compares identifiers and file sizes by default
 
 
 Deprecated

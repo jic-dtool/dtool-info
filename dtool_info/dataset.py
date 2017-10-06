@@ -203,8 +203,14 @@ def fetch(dataset_uri, item_identifier):
 
 
 @click.command()
+@click.option(
+    "-f",
+    "--full",
+    is_flag=True,
+    help="Include file hash comparisons."
+)
 @dataset_uri_argument
-def verify(dataset_uri):
+def verify(full, dataset_uri):
     """Return abspath to file with item content.
 
     Fetches the file from remote storage if required.
@@ -232,16 +238,17 @@ def verify(dataset_uri):
         click.secho(message, fg="red")
         all_okay = False
 
-    for i in manifest_identifiers.intersection(generated_identifiers):
-        generated_hash = generated_manifest["items"][i]["hash"]
-        manifest_hash = dataset.item_properties(i)["hash"]
-        if generated_hash != manifest_hash:
-            message = "Altered item: {} {}".format(
-                i,
-                dataset.item_properties(i)["relpath"]
-            )
-            click.secho(message, fg="red")
-            all_okay = False
+    if full:
+        for i in manifest_identifiers.intersection(generated_identifiers):
+            generated_hash = generated_manifest["items"][i]["hash"]
+            manifest_hash = dataset.item_properties(i)["hash"]
+            if generated_hash != manifest_hash:
+                message = "Altered item: {} {}".format(
+                    i,
+                    dataset.item_properties(i)["relpath"]
+                )
+                click.secho(message, fg="red")
+                all_okay = False
 
     if not all_okay:
         sys.exit(1)
