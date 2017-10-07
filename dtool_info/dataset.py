@@ -1,6 +1,5 @@
 """Commands for getting information about datasets."""
 
-import os
 import sys
 
 import click
@@ -19,7 +18,6 @@ from dtoolcore.compare import (
 from dtool_cli.cli import (
     dataset_uri_argument,
     dataset_uri_validation,
-    storagebroker_validation,
     CONFIG_PATH,
 )
 
@@ -90,6 +88,25 @@ def diff(full, dataset_uri, reference_dataset_uri):
             sys.exit(3)
 
 
+def _list_dataset_items(uri):
+    try:
+        dataset = dtoolcore.DataSet.from_uri(
+            uri=uri,
+            config_path=CONFIG_PATH
+        )
+    except dtoolcore.DtoolCoreTypeError:
+        click.secho(
+            "Cannot list the items of a proto dataset",
+            fg="red",
+            err=True
+        )
+        sys.exit(1)
+    for i in dataset.identifiers:
+        props = dataset.item_properties(i)
+        line = "{} - {}".format(i, props["relpath"])
+        click.secho(line)
+
+
 def _list_datasets(uri):
     StorageBroker = dtoolcore._get_storage_broker(uri, CONFIG_PATH)
     info = []
@@ -114,6 +131,7 @@ def _list_datasets(uri):
         i["width"] = name_max_len
         line = "{uuid} - {name:{width}s} - {uri}".format(**i)
         click.secho(line, fg=i["fg"])
+
 
 @click.command()
 @click.argument("uri")
