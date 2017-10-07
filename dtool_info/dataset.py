@@ -136,8 +136,12 @@ def _list_datasets(uri):
 @click.command()
 @click.argument("uri")
 def ls(uri):
-    """List datasets in a location.
+    """List datasets / items in a dataset.
 
+    If the URI is a dataset the items in the dataset will be listed.
+    It is not possible to list the items in a proto dataset.
+
+    If the URI is a location containing datasets the datasets will be listed.
     Proto datasets are highlighted in red.
     """
     if dtoolcore._is_dataset(uri, CONFIG_PATH):
