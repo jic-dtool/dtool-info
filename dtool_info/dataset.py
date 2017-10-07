@@ -90,22 +90,10 @@ def diff(full, dataset_uri, reference_dataset_uri):
             sys.exit(3)
 
 
-@click.command()
-@click.argument("prefix", default="")
-@click.argument("storage", default="file", callback=storagebroker_validation)
-def ls(prefix, storage):
-    """List datasets in a location.
-
-    Proto datasets are highlighted in red.
-    """
-    storage_broker_lookup = dtoolcore._generate_storage_broker_lookup()
-    StorageBroker = storage_broker_lookup[storage]
-
-    if storage == "file":
-        prefix = os.path.abspath(prefix)
-
+def _list_datasets(uri):
+    StorageBroker = dtoolcore._get_storage_broker(uri, CONFIG_PATH)
     info = []
-    for uri in StorageBroker.list_dataset_uris(prefix, CONFIG_PATH):
+    for uri in StorageBroker.list_dataset_uris(uri, CONFIG_PATH):
         admin_metadata = dtoolcore._admin_metadata_from_uri(uri, CONFIG_PATH)
         fg = None
         if admin_metadata["type"] == "protodataset":
@@ -126,6 +114,18 @@ def ls(prefix, storage):
         i["width"] = name_max_len
         line = "{uuid} - {name:{width}s} - {uri}".format(**i)
         click.secho(line, fg=i["fg"])
+
+@click.command()
+@click.argument("uri")
+def ls(uri):
+    """List datasets in a location.
+
+    Proto datasets are highlighted in red.
+    """
+    if dtoolcore._is_dataset(uri, CONFIG_PATH):
+        _list_dataset_items(uri)
+    else:
+        _list_datasets(uri)
 
 
 @click.command()
