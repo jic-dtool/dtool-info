@@ -2,6 +2,11 @@
 
 import sys
 
+try:
+    from urlparse import urlparse
+except ImportError:
+    from urllib.parse import urlparse
+
 import click
 
 import pygments
@@ -109,8 +114,9 @@ def _list_dataset_items(uri):
 
 def _list_datasets(uri):
     StorageBroker = dtoolcore._get_storage_broker(uri, CONFIG_PATH)
+    parsed_uri = urlparse(uri)
     info = []
-    for uri in StorageBroker.list_dataset_uris(uri, CONFIG_PATH):
+    for uri in StorageBroker.list_dataset_uris(parsed_uri.path, CONFIG_PATH):
         admin_metadata = dtoolcore._admin_metadata_from_uri(uri, CONFIG_PATH)
         fg = None
         if admin_metadata["type"] == "protodataset":
