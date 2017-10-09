@@ -10,6 +10,7 @@ This change log uses principles from `keep a changelog <http://keepachangelog.co
 Added
 ^^^^^
 
+- ``dtool ls`` can now be used to list the relpaths of the items in a dataset
 - ``-f/--full`` flag to ``dtool diff`` command to include checking of file
   hashes  
 - ``-f/--full`` flag to ``dtool verify`` command to include checking of file
@@ -19,6 +20,7 @@ Added
 Changed
 ^^^^^^^
 
+- ``dtool ls`` now works with URIs rather than with prefix and storage arguments
 - ``dtool diff`` now only compares identifiers and file sizes by default
 - ``dtool verify`` now only compares identifiers and file sizes by default
 
