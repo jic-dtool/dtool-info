@@ -28,6 +28,7 @@ setup(
             "item=dtool_info.dataset:item",
             "identifiers=dtool_info.dataset:identifiers",
             "verify=dtool_info.dataset:verify",
+            "overlay=dtool_info.overlay:overlay",
         ],
     },
     download_url="{}/tarball/{}".format(url, version),
