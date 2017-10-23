@@ -10,6 +10,9 @@ This change log uses principles from `keep a changelog <http://keepachangelog.co
 Added
 ^^^^^
 
+- ``dtool overlay ls`` command to list the overlays in dataset
+- ``dtool overlay show`` command to show the content of a specific overlay
+
 
 Changed
 ^^^^^^^
