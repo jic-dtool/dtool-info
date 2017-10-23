@@ -26,6 +26,7 @@ def test_overlay_list_command():
     assert result.output.find("age") != -1
     assert result.output.find("gender") != -1
 
+
 def test_overlay_show_command():
     from dtool_info.overlay import show
 
