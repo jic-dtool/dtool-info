@@ -112,11 +112,11 @@ def _list_dataset_items(uri):
         click.secho(line)
 
 
-def _list_datasets(uri):
-    StorageBroker = dtoolcore._get_storage_broker(uri, CONFIG_PATH)
-    parsed_uri = urlparse(uri)
+def _list_datasets(base_uri):
+    base_uri = dtoolcore.utils.sanitise_uri(base_uri)
+    StorageBroker = dtoolcore._get_storage_broker(base_uri, CONFIG_PATH)
     info = []
-    for uri in StorageBroker.list_dataset_uris(parsed_uri.path, CONFIG_PATH):
+    for uri in StorageBroker.list_dataset_uris(base_uri, CONFIG_PATH):
         admin_metadata = dtoolcore._admin_metadata_from_uri(uri, CONFIG_PATH)
         fg = None
         if admin_metadata["type"] == "protodataset":
