@@ -2,11 +2,6 @@
 
 import sys
 
-try:
-    from urlparse import urlparse
-except ImportError:
-    from urllib.parse import urlparse
-
 import click
 
 import pygments

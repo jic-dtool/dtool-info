@@ -44,7 +44,7 @@ def show(dataset_uri, overlay_name):
     dataset = dtoolcore.DataSet.from_uri(dataset_uri)
     try:
         overlay = dataset.get_overlay(overlay_name)
-    except:
+    except:  # NOQA
         click.secho(
             "No such overlay: {}".format(overlay_name),
             fg="red",
