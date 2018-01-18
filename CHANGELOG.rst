@@ -31,6 +31,15 @@ Security
 ^^^^^^^^
 
 
+[0.8.0] - 2018-01-18
+--------------------
+
+Changed
+^^^^^^^
+
+- Updated code to make use of dtoolcore version 3 API
+
+
 [0.7.0] - 2017-10-23
 --------------------
 
