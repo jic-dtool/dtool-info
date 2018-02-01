@@ -1,5 +1,6 @@
 """Commands for getting information about datasets."""
 
+import datetime
 import sys
 
 import click
@@ -22,6 +23,12 @@ from dtool_cli.cli import (
 )
 
 item_identifier_argument = click.argument("item_identifier")
+
+
+def _date_fmt(timestamp):
+    timestamp = float(timestamp)
+    datetime_obj = datetime.datetime.fromtimestamp(timestamp)
+    return datetime_obj.strftime("%Y-%m-%d")
 
 
 @click.command()
@@ -107,36 +114,46 @@ def _list_dataset_items(uri):
         click.secho(line)
 
 
-def _list_datasets(base_uri):
+def _list_datasets(base_uri, verbosity):
     base_uri = dtoolcore.utils.sanitise_uri(base_uri)
     StorageBroker = dtoolcore._get_storage_broker(base_uri, CONFIG_PATH)
     info = []
     for uri in StorageBroker.list_dataset_uris(base_uri, CONFIG_PATH):
         admin_metadata = dtoolcore._admin_metadata_from_uri(uri, CONFIG_PATH)
-        fg = None
+        fg = "green"
         if admin_metadata["type"] == "protodataset":
             fg = "red"
-        info.append(dict(
+        i = dict(
             name=admin_metadata["name"],
             uuid=admin_metadata["uuid"],
+            creator=admin_metadata["creator_username"],
             uri=uri,
             fg=fg)
-        )
+        if "frozen_at" in admin_metadata:
+            i["date"] = _date_fmt(admin_metadata["frozen_at"])
+        info.append(i)
 
     if len(info) == 0:
         sys.exit(0)
 
-    name_max_len = max([len(i["name"]) for i in info])
-
     for i in info:
-        i["width"] = name_max_len
-        line = "{uuid} - {name:{width}s} - {uri}".format(**i)
-        click.secho(line, fg=i["fg"])
+        click.secho(i["name"], fg=i["fg"])
+        if verbosity == 0:
+            continue
+        else:
+            click.secho("  " + i["uri"])
+
+        if verbosity > 1:
+            click.secho("  " + i["creator"])
+            if "date" in i:
+                click.secho("  " + i["date"])
+            click.secho("  " + i["uuid"])
 
 
 @click.command()
+@click.option("-v", "--verbose", count=True)
 @click.argument("uri")
-def ls(uri):
+def ls(verbose, uri):
     """List datasets / items in a dataset.
 
     If the URI is a dataset the items in the dataset will be listed.
@@ -148,7 +165,7 @@ def ls(uri):
     if dtoolcore._is_dataset(uri, CONFIG_PATH):
         _list_dataset_items(uri)
     else:
-        _list_datasets(uri)
+        _list_datasets(uri, verbose)
 
 
 @click.command()
