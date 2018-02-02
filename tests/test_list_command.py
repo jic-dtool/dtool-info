@@ -17,16 +17,12 @@ def test_dataset_ls_functional():
 
     # Create one expected line.
     lion_ds = DataSet.from_uri(lion_dataset_uri)
-    expected_line = "{} - {}".format(
-        lion_ds.uuid,
-        lion_ds.name
-    )
 
     runner = CliRunner()
 
     result = runner.invoke(ls, [SAMPLE_DATASETS])
     assert result.exit_code == 0
-    assert result.output.find(expected_line) != -1
+    assert result.output.find(lion_ds.name) != -1
 
 
 def test_works_with_relative_path(chdir_fixture):  # NOQA
@@ -40,16 +36,12 @@ def test_works_with_relative_path(chdir_fixture):  # NOQA
 
     # Create one expected line.
     lion_ds = DataSet.from_uri(lion_dataset_uri)
-    expected_line = "{} - {}".format(
-        lion_ds.uuid,
-        lion_ds.name
-    )
 
     runner = CliRunner()
 
-    result = runner.invoke(ls, ["."])
+    result = runner.invoke(ls, ["-q", "."])
     assert result.exit_code == 0
-    assert result.output.find(expected_line) != -1
+    assert result.output.find(lion_ds.name) != -1
 
 
 def test_dataset_ls_dataset_content_functional():
@@ -62,7 +54,7 @@ def test_dataset_ls_dataset_content_functional():
     lion_ds = DataSet.from_uri(lion_dataset_uri)
     for i in lion_ds.identifiers:
         props = lion_ds.item_properties(i)
-        line = "{} - {}".format(i, props["relpath"])
+        line = "{}  {}".format(i, props["relpath"])
         expected_lines.append(line)
 
     runner = CliRunner()
