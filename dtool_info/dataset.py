@@ -25,6 +25,14 @@ from dtool_cli.cli import (
 item_identifier_argument = click.argument("item_identifier")
 
 
+def _sizeof_fmt(num, suffix='B'):
+    for unit in ['','Ki','Mi','Gi','Ti','Pi','Ei','Zi']:
+        if abs(num) < 1024.0:
+            return "{:6.1f}{:3s}".format(num, unit + suffix)
+        num /= 1024.0
+    return "{:6.1f}{:3s}".format(num, "Yi" + suffix)
+
+
 def _date_fmt(timestamp):
     timestamp = float(timestamp)
     datetime_obj = datetime.datetime.fromtimestamp(timestamp)
@@ -95,7 +103,7 @@ def diff(full, dataset_uri, reference_dataset_uri):
             sys.exit(3)
 
 
-def _list_dataset_items(uri):
+def _list_dataset_items(uri, quiet, verbose):
     try:
         dataset = dtoolcore.DataSet.from_uri(
             uri=uri,
@@ -110,7 +118,15 @@ def _list_dataset_items(uri):
         sys.exit(1)
     for i in dataset.identifiers:
         props = dataset.item_properties(i)
-        line = "{} - {}".format(i, props["relpath"])
+        line = "{}  {}".format(i, props["relpath"])
+        if verbose:
+            line = "{}{}  {}".format(
+                i,
+                _sizeof_fmt(props["size_in_bytes"]),
+                props["relpath"]
+            )
+        if quiet:
+            line = props["relpath"]
         click.secho(line)
 
 
@@ -164,7 +180,7 @@ def ls(quiet, verbose, uri):
     Proto datasets are highlighted in red.
     """
     if dtoolcore._is_dataset(uri, CONFIG_PATH):
-        _list_dataset_items(uri)
+        _list_dataset_items(uri, quiet, verbose)
     else:
         _list_datasets(uri, quiet, verbose)
 
