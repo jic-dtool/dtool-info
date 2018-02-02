@@ -10,6 +10,8 @@ This change log uses principles from `keep a changelog <http://keepachangelog.co
 Added
 ^^^^^
 
+- ``--quite`` and ``--verbose`` options to ``dtool ls`` and improved formatting
+
 
 Changed
 ^^^^^^^
