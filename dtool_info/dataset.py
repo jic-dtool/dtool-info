@@ -114,17 +114,19 @@ def _list_dataset_items(uri):
         click.secho(line)
 
 
-def _list_datasets(base_uri, verbosity):
+def _list_datasets(base_uri, quiet, verbose):
     base_uri = dtoolcore.utils.sanitise_uri(base_uri)
     StorageBroker = dtoolcore._get_storage_broker(base_uri, CONFIG_PATH)
     info = []
     for uri in StorageBroker.list_dataset_uris(base_uri, CONFIG_PATH):
         admin_metadata = dtoolcore._admin_metadata_from_uri(uri, CONFIG_PATH)
         fg = "green"
+        name = admin_metadata["name"]
         if admin_metadata["type"] == "protodataset":
             fg = "red"
+            name = "*" + name
         i = dict(
-            name=admin_metadata["name"],
+            name=name,
             uuid=admin_metadata["uuid"],
             creator=admin_metadata["creator_username"],
             uri=uri,
@@ -138,22 +140,21 @@ def _list_datasets(base_uri, verbosity):
 
     for i in info:
         click.secho(i["name"], fg=i["fg"])
-        if verbosity == 0:
+        if quiet:
             continue
-        else:
-            click.secho("  " + i["uri"])
-
-        if verbosity > 1:
-            click.secho("  " + i["creator"])
+        click.secho("  " + i["uri"])
+        if verbose:
+            click.secho("  " + i["creator"], nl=False)
             if "date" in i:
-                click.secho("  " + i["date"])
+                click.secho("  " + i["date"], nl=False)
             click.secho("  " + i["uuid"])
 
 
 @click.command()
-@click.option("-v", "--verbose", count=True)
+@click.option("-q", "--quiet", is_flag=True)
+@click.option("-v", "--verbose", is_flag=True)
 @click.argument("uri")
-def ls(verbose, uri):
+def ls(quiet, verbose, uri):
     """List datasets / items in a dataset.
 
     If the URI is a dataset the items in the dataset will be listed.
@@ -165,7 +166,7 @@ def ls(verbose, uri):
     if dtoolcore._is_dataset(uri, CONFIG_PATH):
         _list_dataset_items(uri)
     else:
-        _list_datasets(uri, verbose)
+        _list_datasets(uri, quiet, verbose)
 
 
 @click.command()
