@@ -10,8 +10,6 @@ This change log uses principles from `keep a changelog <http://keepachangelog.co
 Added
 ^^^^^
 
-- ``--quite`` and ``--verbose`` options to ``dtool ls`` and improved formatting
-
 
 Changed
 ^^^^^^^
@@ -31,6 +29,15 @@ Fixed
 
 Security
 ^^^^^^^^
+
+
+[0.9.0] - 2018-02-05
+--------------------
+
+Added
+^^^^^
+
+- ``--quite`` and ``--verbose`` options to ``dtool ls`` and improved formatting
 
 
 [0.8.0] - 2018-01-18
