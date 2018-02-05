@@ -1,6 +1,10 @@
 README
 ======
 
+.. image:: https://badge.fury.io/py/dtool-info.svg
+   :target: http://badge.fury.io/py/dtool-info
+   :alt: PyPi package
+
 Dtool plugin for getting information about datasets
 
 Installation
