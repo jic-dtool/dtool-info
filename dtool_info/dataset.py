@@ -310,12 +310,23 @@ def verify(full, dataset_uri):
         click.secho(message, fg="red")
         all_okay = False
 
+    for i in manifest_identifiers.intersection(generated_identifiers):
+        generated_hash = generated_manifest["items"][i]["size_in_bytes"]
+        manifest_hash = dataset.item_properties(i)["size_in_bytes"]
+        if generated_hash != manifest_hash:
+            message = "Altered item size: {} {}".format(
+                i,
+                dataset.item_properties(i)["relpath"]
+            )
+            click.secho(message, fg="red")
+            all_okay = False
+
     if full:
         for i in manifest_identifiers.intersection(generated_identifiers):
             generated_hash = generated_manifest["items"][i]["hash"]
             manifest_hash = dataset.item_properties(i)["hash"]
             if generated_hash != manifest_hash:
-                message = "Altered item: {} {}".format(
+                message = "Altered item hash: {} {}".format(
                     i,
                     dataset.item_properties(i)["relpath"]
                 )

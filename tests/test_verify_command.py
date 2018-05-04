@@ -52,9 +52,10 @@ def test_dataset_verify_functional(tmp_dir_fixture):  # NOQA
         fh.write("Different content")
 
     result = runner.invoke(verify, [uri])
-    assert result.exit_code == 0
-    assert result.output.startswith("All good")
+    assert result.exit_code == 1
+    assert result.output.startswith("Altered item size: ")
 
     result = runner.invoke(verify, ["--full", uri])
     assert result.exit_code == 1
-    assert result.output.startswith("Altered item: ")
+    assert result.output.startswith("Altered item size: ")
+    assert result.output.find("Altered item hash: ") != -1
