@@ -26,6 +26,9 @@ Removed
 Fixed
 ^^^^^
 
+- Fixed defect where running ``dtool item properties`` with an invalid identifier
+  resulted in a KeyError exception being propagated to the user
+
 
 Security
 ^^^^^^^^

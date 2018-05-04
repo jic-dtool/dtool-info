@@ -31,6 +31,21 @@ def test_dataset_item_properties_functional():
     assert expected == actual
 
 
+def test_dataset_item_properties_with_invalid_key_functional():
+
+    from dtool_info.dataset import item
+
+    runner = CliRunner()
+
+    result = runner.invoke(
+        item,
+        ["properties", lion_dataset_uri, "nonsense"])
+    assert result.exit_code == 20
+
+    expected = "No such item in dataset: nonsense"
+    assert expected == result.output.strip()
+
+
 def test_dataset_item_fetch_functional():
 
     from dtoolcore import DataSet

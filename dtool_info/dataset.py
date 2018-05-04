@@ -236,7 +236,15 @@ def item():
 def properties(dataset_uri, item_identifier):
     """Report item properties."""
     dataset = dtoolcore.DataSet.from_uri(dataset_uri)
-    props = dataset.item_properties(item_identifier)
+    try:
+        props = dataset.item_properties(item_identifier)
+    except KeyError:
+        click.secho(
+            "No such item in dataset: {}".format(item_identifier),
+            fg="red",
+            err=True
+        )
+        sys.exit(20)
 
     json_lines = [
         '{',
