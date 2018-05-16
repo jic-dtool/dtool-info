@@ -21,7 +21,7 @@ from dtool_cli.cli import (
     CONFIG_PATH,
 )
 
-from utils import sizeof_fmt, date_fmt
+from dtool_info.utils import sizeof_fmt, date_fmt
 
 item_identifier_argument = click.argument("item_identifier")
 

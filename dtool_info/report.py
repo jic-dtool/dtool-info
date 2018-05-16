@@ -10,7 +10,7 @@ import dtoolcore
 
 from dtool_cli.cli import CONFIG_PATH
 
-from utils import sizeof_fmt, date_fmt
+from dtool_info.utils import sizeof_fmt, date_fmt
 
 JINJA2_ENV = Environment(loader=PackageLoader('dtool_info', 'templates'))
 
