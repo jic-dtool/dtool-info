@@ -7,6 +7,7 @@ readme = open('README.rst').read()
 setup(
     name="dtool-info",
     packages=["dtool_info"],
+    package_data={"dtool_info": ["templates/*"]},
     version=version,
     description="Dtool plugin for getting information about datasets",
     long_description=readme,
