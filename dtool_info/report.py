@@ -115,12 +115,40 @@ def _html_report(info):
     click.secho(html)
 
 
+def _csv_tsv_header_items():
+    return [
+        "name",
+        "size_in_bytes",
+        "creator",
+        "num_items",
+        "date",
+        "uri"
+    ]
+
+
+def _csv_tsv_column_items(ds_info):
+    return [
+        ds_info["name"],
+        str(ds_info["size_int"]),
+        ds_info["creator"],
+        str(ds_info["num_items"]),
+        ds_info["date"],
+        ds_info["uri"]
+    ]
+
+
+def _csv_report(info):
+    click.secho(",".join(_csv_tsv_header_items()))
+    for ds_info in info["datasets"]:
+        click.secho(",".join(_csv_tsv_column_items(ds_info)))
+
+
 @click.command()
 @click.argument("uri")
 @click.option(
     "-f",
     "--format",
-    type=click.Choice(["html"]),
+    type=click.Choice(["csv", "html"]),
     help="Select the output format."
 )
 def report(uri, format):
@@ -130,5 +158,7 @@ def report(uri, format):
 
     if format is None:
         _cmd_line_report(info)
+    elif format == "csv":
+        _csv_report(info)
     elif format == "html":
         _html_report(info)
