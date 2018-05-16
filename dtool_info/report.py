@@ -11,7 +11,7 @@ import dtoolcore
 
 from dtool_cli.cli import CONFIG_PATH
 
-JINJA2_ENV = Environment(loader=PackageLoader('dtool_report', 'templates'))
+JINJA2_ENV = Environment(loader=PackageLoader('dtool_info', 'templates'))
 
 
 def _sizeof_fmt(num, suffix='B'):
