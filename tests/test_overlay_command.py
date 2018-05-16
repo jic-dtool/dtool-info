@@ -7,10 +7,10 @@ from click.testing import CliRunner
 
 import dtoolcore
 
-from . import SAMPLE_DATASETS
+from . import SAMPLE_DATASETS_DIR
 
 people_dataset_uri = "file://" + os.path.join(
-    SAMPLE_DATASETS,
+    SAMPLE_DATASETS_DIR,
     "people"
 )
 

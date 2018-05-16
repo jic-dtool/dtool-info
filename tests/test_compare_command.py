@@ -4,12 +4,12 @@ import os
 
 from click.testing import CliRunner
 
-from . import SAMPLE_DATASETS
+from . import SAMPLE_DATASETS_DIR
 
-he_dataset_uri = "file://" + os.path.join(SAMPLE_DATASETS, "he")
-she_dataset_uri = "file://" + os.path.join(SAMPLE_DATASETS, "she")
-cat_dataset_uri = "file://" + os.path.join(SAMPLE_DATASETS, "cat")
-lion_dataset_uri = "file://" + os.path.join(SAMPLE_DATASETS, "lion")
+he_dataset_uri = "file://" + os.path.join(SAMPLE_DATASETS_DIR, "he")
+she_dataset_uri = "file://" + os.path.join(SAMPLE_DATASETS_DIR, "she")
+cat_dataset_uri = "file://" + os.path.join(SAMPLE_DATASETS_DIR, "cat")
+lion_dataset_uri = "file://" + os.path.join(SAMPLE_DATASETS_DIR, "lion")
 
 
 def test_dataset_diff_functional():

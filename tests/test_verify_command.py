@@ -6,10 +6,10 @@ from click.testing import CliRunner
 
 import dtoolcore
 
-from . import SAMPLE_DATASETS
+from . import SAMPLE_DATASETS_DIR
 from . import tmp_dir_fixture  # NOQA
 
-lion_dataset_uri = "file://" + os.path.join(SAMPLE_DATASETS, "lion")
+lion_dataset_uri = "file://" + os.path.join(SAMPLE_DATASETS_DIR, "lion")
 
 
 def test_dataset_verify_functional(tmp_dir_fixture):  # NOQA

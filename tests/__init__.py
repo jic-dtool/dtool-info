@@ -8,7 +8,7 @@ import pytest
 
 _HERE = os.path.dirname(__file__)
 _DATA = os.path.join(_HERE, "data")
-SAMPLE_DATASETS = os.path.join(_DATA, "datasets")
+SAMPLE_DATASETS_DIR = os.path.join(_DATA, "datasets")
 
 
 @pytest.fixture

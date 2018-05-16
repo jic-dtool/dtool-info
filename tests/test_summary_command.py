@@ -5,9 +5,9 @@ import json
 
 from click.testing import CliRunner
 
-from . import SAMPLE_DATASETS
+from . import SAMPLE_DATASETS_DIR
 
-lion_dataset_uri = "file://" + os.path.join(SAMPLE_DATASETS, "lion")
+lion_dataset_uri = "file://" + os.path.join(SAMPLE_DATASETS_DIR, "lion")
 
 
 def test_dataset_summary_functional():

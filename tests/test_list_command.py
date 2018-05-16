@@ -5,9 +5,9 @@ import os
 from click.testing import CliRunner
 
 from . import chdir_fixture  # NOQA
-from . import SAMPLE_DATASETS
+from . import SAMPLE_DATASETS_DIR
 
-lion_dataset_uri = "file://" + os.path.join(SAMPLE_DATASETS, "lion")
+lion_dataset_uri = "file://" + os.path.join(SAMPLE_DATASETS_DIR, "lion")
 
 
 def test_dataset_ls_functional():
@@ -20,7 +20,7 @@ def test_dataset_ls_functional():
 
     runner = CliRunner()
 
-    result = runner.invoke(ls, [SAMPLE_DATASETS])
+    result = runner.invoke(ls, [SAMPLE_DATASETS_DIR])
     assert result.exit_code == 0
     assert result.output.find(lion_ds.name) != -1
 
@@ -31,7 +31,7 @@ def test_works_with_relative_path(chdir_fixture):  # NOQA
     from dtoolcore import DataSet
     from dtool_info.dataset import ls
 
-    lion_directory = os.path.join(SAMPLE_DATASETS, "lion")
+    lion_directory = os.path.join(SAMPLE_DATASETS_DIR, "lion")
     shutil.copytree(lion_directory, "lion")
 
     # Create one expected line.
