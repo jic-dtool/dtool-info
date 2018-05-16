@@ -1,6 +1,5 @@
 """Logic for generating reports on collections of datasets."""
 
-import datetime
 from operator import itemgetter
 
 import click
@@ -11,21 +10,9 @@ import dtoolcore
 
 from dtool_cli.cli import CONFIG_PATH
 
+from utils import sizeof_fmt, date_fmt
+
 JINJA2_ENV = Environment(loader=PackageLoader('dtool_info', 'templates'))
-
-
-def _sizeof_fmt(num, suffix='B'):
-    for unit in ['', 'Ki', 'Mi', 'Gi', 'Ti', 'Pi', 'Ei', 'Zi']:
-        if abs(num) < 1024.0:
-            return "{:6.1f}{:3s}".format(num, unit + suffix)
-        num /= 1024.0
-    return "{:6.1f}{:3s}".format(num, "Yi" + suffix)
-
-
-def _date_fmt(timestamp):
-    timestamp = float(timestamp)
-    datetime_obj = datetime.datetime.fromtimestamp(timestamp)
-    return datetime_obj.strftime("%Y-%m-%d")
 
 
 def _dataset_info(dataset):
@@ -39,12 +26,12 @@ def _dataset_info(dataset):
     tot_size = sum([dataset.item_properties(i)["size_in_bytes"]
                     for i in dataset.identifiers])
     info["size_int"] = tot_size
-    info["size_str"] = _sizeof_fmt(tot_size)
+    info["size_str"] = sizeof_fmt(tot_size)
 
     info["creator"] = dataset._admin_metadata["creator_username"]
     info["name"] = dataset._admin_metadata["name"]
 
-    info["date"] = _date_fmt(dataset._admin_metadata["frozen_at"])
+    info["date"] = date_fmt(dataset._admin_metadata["frozen_at"])
 
     info["num_items"] = len(dataset.identifiers)
 
@@ -75,7 +62,7 @@ def _base_uri_info(base_uri):
         info["total_size_int"] += dataset_info["size_int"]
         info["total_items"] += dataset_info["num_items"]
 
-    info["total_size_str"] = _sizeof_fmt(info["total_size_int"])
+    info["total_size_str"] = sizeof_fmt(info["total_size_int"])
     info["num_datasets"] = len(info["datasets"])
 
     return info

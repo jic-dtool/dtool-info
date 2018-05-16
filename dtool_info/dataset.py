@@ -1,6 +1,5 @@
 """Commands for getting information about datasets."""
 
-import datetime
 import sys
 
 import click
@@ -22,21 +21,9 @@ from dtool_cli.cli import (
     CONFIG_PATH,
 )
 
+from utils import sizeof_fmt, date_fmt
+
 item_identifier_argument = click.argument("item_identifier")
-
-
-def _sizeof_fmt(num, suffix='B'):
-    for unit in ['', 'Ki', 'Mi', 'Gi', 'Ti', 'Pi', 'Ei', 'Zi']:
-        if abs(num) < 1024.0:
-            return "{:6.1f}{:3s}".format(num, unit + suffix)
-        num /= 1024.0
-    return "{:6.1f}{:3s}".format(num, "Yi" + suffix)
-
-
-def _date_fmt(timestamp):
-    timestamp = float(timestamp)
-    datetime_obj = datetime.datetime.fromtimestamp(timestamp)
-    return datetime_obj.strftime("%Y-%m-%d")
 
 
 @click.command()
@@ -122,7 +109,7 @@ def _list_dataset_items(uri, quiet, verbose):
         if verbose:
             line = "{}{}  {}".format(
                 i,
-                _sizeof_fmt(props["size_in_bytes"]),
+                sizeof_fmt(props["size_in_bytes"]),
                 props["relpath"]
             )
         if quiet:
@@ -148,7 +135,7 @@ def _list_datasets(base_uri, quiet, verbose):
             uri=uri,
             fg=fg)
         if "frozen_at" in admin_metadata:
-            i["date"] = _date_fmt(admin_metadata["frozen_at"])
+            i["date"] = date_fmt(admin_metadata["frozen_at"])
         info.append(i)
 
     if len(info) == 0:
