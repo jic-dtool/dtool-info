@@ -137,10 +137,10 @@ def _csv_tsv_column_items(ds_info):
     ]
 
 
-def _csv_report(info):
-    click.secho(",".join(_csv_tsv_header_items()))
+def _csv_tsv_report(info, separator):
+    click.secho(separator.join(_csv_tsv_header_items()))
     for ds_info in info["datasets"]:
-        click.secho(",".join(_csv_tsv_column_items(ds_info)))
+        click.secho(separator.join(_csv_tsv_column_items(ds_info)))
 
 
 @click.command()
@@ -148,7 +148,7 @@ def _csv_report(info):
 @click.option(
     "-f",
     "--format",
-    type=click.Choice(["csv", "html"]),
+    type=click.Choice(["csv", "tsv", "html"]),
     help="Select the output format."
 )
 def report(uri, format):
@@ -159,6 +159,8 @@ def report(uri, format):
     if format is None:
         _cmd_line_report(info)
     elif format == "csv":
-        _csv_report(info)
+        _csv_tsv_report(info, ",")
+    elif format == "tsv":
+        _csv_tsv_report(info, "\t")
     elif format == "html":
         _html_report(info)

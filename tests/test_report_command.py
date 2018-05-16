@@ -50,3 +50,20 @@ def test_report_csv_functional():
     ]
     for a, e in zip(result.output.split("\n"), expected_starts):
         assert a.startswith(e)
+
+
+def test_report_tsv_functional():
+
+    from dtool_info.report import report
+
+    runner = CliRunner()
+    result = runner.invoke(report, ["-f", "tsv", REPORT_DATASETS_DIR])
+    assert result.exit_code == 0
+
+    expected_starts = [
+        "name\tsize_in_bytes\tcreator\tnum_items\tdate\turi",
+        "big_cats\t19\tolssont\t3\t2018-05-16",
+        "toys\t11\tolssont\t2\t2018-05-16",
+    ]
+    for a, e in zip(result.output.split("\n"), expected_starts):
+        assert a.startswith(e)
