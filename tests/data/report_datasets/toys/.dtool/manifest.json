@@ -1,0 +1,18 @@
+{
+  "dtoolcore_version": "3.1.0", 
+  "hash_function": "md5sum_hexdigest", 
+  "items": {
+    "270814432d3e279f034be7d90f9aa9787df4587b": {
+      "hash": "cd96584d4e214c304d0d90a1d4642688", 
+      "relpath": "ball.txt", 
+      "size_in_bytes": 5, 
+      "utc_timestamp": 1526504018.0
+    }, 
+    "5bfef30491a7a3a169bfc0814e6e80a0fcdb0463": {
+      "hash": "cc2aab64acbd5a777dcac40c03948d39", 
+      "relpath": "cards.txt", 
+      "size_in_bytes": 6, 
+      "utc_timestamp": 1526504038.0
+    }
+  }
+}

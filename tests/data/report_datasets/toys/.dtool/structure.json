@@ -1,0 +1,35 @@
+{
+  "admin_metadata_relpath": [
+    ".dtool", 
+    "dtool"
+  ], 
+  "data_directory": [
+    "data"
+  ], 
+  "dataset_readme_relpath": [
+    "README.yml"
+  ], 
+  "dtool_directory": [
+    ".dtool"
+  ], 
+  "dtool_readme_relpath": [
+    ".dtool", 
+    "README.txt"
+  ], 
+  "manifest_relpath": [
+    ".dtool", 
+    "manifest.json"
+  ], 
+  "metadata_fragments_directory": [
+    ".dtool", 
+    "tmp_fragments"
+  ], 
+  "overlays_directory": [
+    ".dtool", 
+    "overlays"
+  ], 
+  "structure_metadata_relpath": [
+    ".dtool", 
+    "structure.json"
+  ]
+}
