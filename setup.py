@@ -18,6 +18,7 @@ setup(
         "click",
         "dtoolcore>=3.0.0",
         "dtool_cli>=0.6.0",
+        "jinja2",
         "pygments",
     ],
     entry_points={
@@ -29,6 +30,7 @@ setup(
             "identifiers=dtool_info.dataset:identifiers",
             "verify=dtool_info.dataset:verify",
             "overlay=dtool_info.overlay:overlay",
+            "report=dtool_info.report:report",
         ],
     },
     download_url="{}/tarball/{}".format(url, version),
