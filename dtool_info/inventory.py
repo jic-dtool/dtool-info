@@ -1,4 +1,4 @@
-"""Logic for generating reports on collections of datasets."""
+"""Logic for generating inventories of datasets."""
 
 from operator import itemgetter
 
@@ -151,8 +151,8 @@ def _csv_tsv_report(info, separator):
     type=click.Choice(["csv", "tsv", "html"]),
     help="Select the output format."
 )
-def report(uri, format):
-    """Generate a report on datasets in a base URI."""
+def inventory(uri, format):
+    """Generate an inventory of datasets in a base URI."""
     base_uri = dtoolcore.utils.sanitise_uri(uri)
     info = _base_uri_info(base_uri)
 

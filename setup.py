@@ -31,7 +31,7 @@ setup(
             "identifiers=dtool_info.dataset:identifiers",
             "verify=dtool_info.dataset:verify",
             "overlay=dtool_info.overlay:overlay",
-            "report=dtool_info.report:report",
+            "inventory=dtool_info.inventory:inventory",
         ],
     },
     download_url="{}/tarball/{}".format(url, version),

@@ -10,7 +10,7 @@ This change log uses principles from `keep a changelog <http://keepachangelog.co
 Added
 ^^^^^
 
-- ``dtool report`` command for generating csv/tsv/html reports of collections
+- ``dtool inventory`` command for generating csv/tsv/html inventories of collections
   of datasets
 
 

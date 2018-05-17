@@ -1,16 +1,16 @@
-"""Test the report command."""
+"""Test the inventory command."""
 
 from click.testing import CliRunner
 
 from . import REPORT_DATASETS_DIR
 
 
-def test_report_functional():
+def test_inventory_functional():
 
-    from dtool_info.report import report
+    from dtool_info.inventory import inventory
 
     runner = CliRunner()
-    result = runner.invoke(report, [REPORT_DATASETS_DIR])
+    result = runner.invoke(inventory, [REPORT_DATASETS_DIR])
     assert result.exit_code == 0
 
     expected = [
@@ -23,24 +23,24 @@ def test_report_functional():
         assert e.strip() == a.strip()
 
 
-def test_report_html_functional():
+def test_inventory_html_functional():
 
-    from dtool_info.report import report
+    from dtool_info.inventory import inventory
 
     runner = CliRunner()
-    result = runner.invoke(report, ["-f", "html", REPORT_DATASETS_DIR])
+    result = runner.invoke(inventory, ["-f", "html", REPORT_DATASETS_DIR])
     assert result.exit_code == 0
 
     assert result.output.find("<html>") != -1
     assert result.output.find("</html>") != -1
 
 
-def test_report_csv_functional():
+def test_inventory_csv_functional():
 
-    from dtool_info.report import report
+    from dtool_info.inventory import inventory
 
     runner = CliRunner()
-    result = runner.invoke(report, ["-f", "csv", REPORT_DATASETS_DIR])
+    result = runner.invoke(inventory, ["-f", "csv", REPORT_DATASETS_DIR])
     assert result.exit_code == 0
 
     expected_starts = [
@@ -52,12 +52,12 @@ def test_report_csv_functional():
         assert a.startswith(e)
 
 
-def test_report_tsv_functional():
+def test_inventory_tsv_functional():
 
-    from dtool_info.report import report
+    from dtool_info.inventory import inventory
 
     runner = CliRunner()
-    result = runner.invoke(report, ["-f", "tsv", REPORT_DATASETS_DIR])
+    result = runner.invoke(inventory, ["-f", "tsv", REPORT_DATASETS_DIR])
     assert result.exit_code == 0
 
     expected_starts = [
