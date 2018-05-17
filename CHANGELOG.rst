@@ -44,7 +44,7 @@ Security
 Added
 ^^^^^
 
-- ``--quite`` and ``--verbose`` options to ``dtool ls`` and improved formatting
+- ``--quiet`` and ``--verbose`` options to ``dtool ls`` and improved formatting
 
 
 [0.8.0] - 2018-01-18
