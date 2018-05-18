@@ -26,6 +26,8 @@ Removed
 Fixed
 ^^^^^
 
+- Defect where inventory html template is not included in Python package on PyPi
+
 
 Security
 ^^^^^^^^
