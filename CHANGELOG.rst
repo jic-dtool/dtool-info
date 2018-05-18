@@ -10,9 +10,6 @@ This change log uses principles from `keep a changelog <http://keepachangelog.co
 Added
 ^^^^^
 
-- ``dtool inventory`` command for generating csv/tsv/html inventories of collections
-  of datasets
-
 
 Changed
 ^^^^^^^
@@ -29,13 +26,26 @@ Removed
 Fixed
 ^^^^^
 
-- Fixed defect where running ``dtool item properties`` with an invalid identifier
-  resulted in a KeyError exception being propagated to the user
-- Fixed defect where ``dtool verify`` did not compare file sizes
-
 
 Security
 ^^^^^^^^
+
+
+[0.10.0] - 2018-05-18
+---------------------
+
+Added
+^^^^^
+
+- ``dtool inventory`` command for generating csv/tsv/html inventories of collections
+  of datasets
+
+Fixed
+^^^^^
+
+- Fixed defect where running ``dtool item properties`` with an invalid identifier
+  resulted in a KeyError exception being propagated to the user
+- Fixed defect where ``dtool verify`` did not compare file sizes
 
 
 [0.9.0] - 2018-02-05
