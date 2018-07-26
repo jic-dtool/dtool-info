@@ -270,9 +270,7 @@ def fetch(dataset_uri, item_identifier):
 )
 @dataset_uri_argument
 def verify(full, dataset_uri):
-    """Return abspath to file with item content.
-
-    Fetches the file from remote storage if required.
+    """Verify the integrity of a dataset.
     """
     dataset = dtoolcore.DataSet.from_uri(dataset_uri)
     all_okay = True

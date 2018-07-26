@@ -26,6 +26,8 @@ Removed
 Fixed
 ^^^^^
 
+- Fixed the documentation of the ``dtool verify`` command
+
 
 Security
 ^^^^^^^^
