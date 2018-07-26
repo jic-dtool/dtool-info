@@ -26,11 +26,18 @@ Removed
 Fixed
 ^^^^^
 
-- Fixed the documentation of the ``dtool verify`` command
-
 
 Security
 ^^^^^^^^
+
+
+[0.10.2] - 2018-07-26
+---------------------
+
+Fixed
+^^^^^
+
+- Fixed the documentation of the ``dtool verify`` command
 
 
 [0.10.1] - 2018-05-18
