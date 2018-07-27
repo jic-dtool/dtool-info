@@ -142,9 +142,10 @@ def _list_datasets(base_uri, quiet, verbose):
         sys.exit(0)
 
     for i in info:
-        click.secho(i["name"], fg=i["fg"])
         if quiet:
+            click.secho(i["uri"], fg=i["fg"])
             continue
+        click.secho(i["name"], fg=i["fg"])
         click.secho("  " + i["uri"])
         if verbose:
             click.secho("  " + i["creator"], nl=False)
