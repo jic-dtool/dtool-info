@@ -26,12 +26,19 @@ Removed
 Fixed
 ^^^^^
 
-- Fixed defect where ``dtool ls -q`` was listing dataset names rather than URIs
-  making it impossible to process datasets in a BASE_URI programatically
-
 
 Security
 ^^^^^^^^
+
+
+[0.10.3] - 2018-07-31
+---------------------
+
+Fixed
+^^^^^
+
+- Fixed defect where ``dtool ls -q`` was listing dataset names rather than URIs
+  making it impossible to process datasets in a BASE_URI programatically
 
 
 [0.10.2] - 2018-07-26
