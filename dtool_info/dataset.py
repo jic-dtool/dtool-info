@@ -262,6 +262,36 @@ def fetch(dataset_uri, item_identifier):
     click.secho(dataset.item_content_abspath(item_identifier))
 
 
+@item.command()
+@click.argument("overlay_name")
+@dataset_uri_argument
+@item_identifier_argument
+def overlay(overlay_name, dataset_uri, item_identifier):
+    """Return abspath to file with item content.
+
+    Fetches the file from remote storage if required.
+    """
+    dataset = dtoolcore.DataSet.from_uri(dataset_uri)
+    if overlay_name not in dataset.list_overlay_names():
+        click.secho(
+            "No such overlay in dataset: {}".format(overlay_name),
+            fg="red",
+            err=True
+        )
+        sys.exit(4)
+    overlay = dataset.get_overlay(overlay_name)
+
+    try:
+        click.secho(overlay[item_identifier])
+    except KeyError:
+        click.secho(
+            "No such identifier in overlay: {}".format(item_identifier),
+            fg="red",
+            err=True
+        )
+        sys.exit(5)
+
+
 @click.command()
 @click.option(
     "-f",
