@@ -10,8 +10,6 @@ This change log uses principles from `keep a changelog <http://keepachangelog.co
 Added
 ^^^^^
 
-- ``dtool item overlay`` command
-
 
 Changed
 ^^^^^^^
@@ -31,6 +29,15 @@ Fixed
 
 Security
 ^^^^^^^^
+
+
+[0.11.0] - 2018-09-20
+---------------------
+
+Added
+^^^^^
+
+- ``dtool item overlay`` command
 
 
 [0.10.3] - 2018-07-31
