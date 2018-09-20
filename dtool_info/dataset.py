@@ -282,7 +282,7 @@ def overlay(overlay_name, dataset_uri, item_identifier):
     overlay = dataset.get_overlay(overlay_name)
 
     try:
-        click.secho(overlay[item_identifier])
+        click.secho(str(overlay[item_identifier]))
     except KeyError:
         click.secho(
             "No such identifier in overlay: {}".format(item_identifier),
