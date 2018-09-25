@@ -292,6 +292,25 @@ def overlay(overlay_name, dataset_uri, item_identifier):
         sys.exit(5)
 
 
+@item.command()
+@dataset_uri_argument
+@item_identifier_argument
+def relpath(dataset_uri, item_identifier):
+    """Return relpath associated with the item.
+    """
+    dataset = dtoolcore.DataSet.from_uri(dataset_uri)
+    try:
+        props = dataset.item_properties(item_identifier)
+    except KeyError:
+        click.secho(
+            "No such item in dataset: {}".format(item_identifier),
+            fg="red",
+            err=True
+        )
+        sys.exit(21)
+    click.secho(props["relpath"])
+
+
 @click.command()
 @click.option(
     "-f",

@@ -93,3 +93,18 @@ def test_dataset_item_overlay_functional():
         ["overlay", "gender", people_dataset_uri, "dontexist"])
     assert result.exit_code == 5
     assert result.output.startswith("No such identifier in overlay")
+
+
+def test_dataset_item_relpath_functional():
+
+    from dtool_info.dataset import item
+
+    # Create expected output.
+
+    runner = CliRunner()
+
+    result = runner.invoke(
+        item,
+        ["relpath", people_dataset_uri, anna_identifier])
+    assert result.exit_code == 0
+    assert result.output.strip() == "anna.txt"
