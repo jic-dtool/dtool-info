@@ -10,9 +10,6 @@ This change log uses principles from `keep a changelog <http://keepachangelog.co
 Added
 ^^^^^
 
-- Added ``dtool uuid`` command
-- Added ``dtool item relpath`` command
-
 
 Changed
 ^^^^^^^
@@ -32,6 +29,15 @@ Fixed
 
 Security
 ^^^^^^^^
+
+[0.12.0] - 2018-09-25
+---------------------
+
+Added
+^^^^^
+
+- Added ``dtool uuid`` command
+- Added ``dtool item relpath`` command
 
 
 [0.11.0] - 2018-09-20
