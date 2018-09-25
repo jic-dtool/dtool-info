@@ -372,3 +372,11 @@ def verify(full, dataset_uri):
         sys.exit(1)
     else:
         click.secho("All good :)", fg="green")
+
+
+@click.command()
+@dataset_uri_argument
+def uuid(dataset_uri):
+    """Return the UUID of the dataset."""
+    dataset = dtoolcore.DataSet.from_uri(dataset_uri)
+    click.secho(dataset.uuid)

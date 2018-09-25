@@ -10,6 +10,7 @@ This change log uses principles from `keep a changelog <http://keepachangelog.co
 Added
 ^^^^^
 
+- Added ``dtool uuid`` command
 - Added ``dtool item relpath`` command
 
 

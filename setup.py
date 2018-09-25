@@ -32,6 +32,7 @@ setup(
             "verify=dtool_info.dataset:verify",
             "overlay=dtool_info.overlay:overlay",
             "inventory=dtool_info.inventory:inventory",
+            "uuid=dtool_info.dataset:uuid",
         ],
     },
     download_url="{}/tarball/{}".format(url, version),
