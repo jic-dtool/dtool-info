@@ -184,7 +184,13 @@ def identifiers(dataset_uri):
 
 @click.command()
 @dataset_uri_argument
-def summary(dataset_uri):
+@click.option(
+    "-f",
+    "--format",
+    type=click.Choice(["json"]),
+    help="Select the output format."
+)
+def summary(dataset_uri, format):
     """Report summary information about a dataset."""
     dataset = dtoolcore.DataSet.from_uri(dataset_uri)
     creator_username = dataset._admin_metadata["creator_username"]
@@ -193,22 +199,36 @@ def summary(dataset_uri):
     tot_size = sum([dataset.item_properties(i)["size_in_bytes"]
                     for i in dataset.identifiers])
 
-    json_lines = [
-        '{',
-        '  "name": "{}",'.format(dataset.name),
-        '  "uuid": "{}",'.format(dataset.uuid),
-        '  "creator_username": "{}",'.format(creator_username),
-        '  "number_of_items": {},'.format(num_items),
-        '  "size_in_bytes": {},'.format(tot_size),
-        '  "frozen_at": {}'.format(frozen_at),
-        '}',
-    ]
-    formatted_json = "\n".join(json_lines)
-    colorful_json = pygments.highlight(
-        formatted_json,
-        pygments.lexers.JsonLexer(),
-        pygments.formatters.TerminalFormatter())
-    click.secho(colorful_json, nl=False)
+    if format == "json":
+        json_lines = [
+            '{',
+            '  "name": "{}",'.format(dataset.name),
+            '  "uuid": "{}",'.format(dataset.uuid),
+            '  "creator_username": "{}",'.format(creator_username),
+            '  "number_of_items": {},'.format(num_items),
+            '  "size_in_bytes": {},'.format(tot_size),
+            '  "frozen_at": {}'.format(frozen_at),
+            '}',
+        ]
+        formatted_json = "\n".join(json_lines)
+        colorful_json = pygments.highlight(
+            formatted_json,
+            pygments.lexers.JsonLexer(),
+            pygments.formatters.TerminalFormatter())
+        click.secho(colorful_json, nl=False)
+
+    else:
+        info = [
+            ("name", dataset.name),
+            ("uuid", dataset.uuid),
+            ("creator_username", creator_username),
+            ("number_of_items", str(num_items)),
+            ("size", sizeof_fmt(tot_size).strip()),
+            ("frozen_at", date_fmt(frozen_at)),
+        ]
+        for key, value in info:
+            click.secho("{}: ".format(key), nl=False)
+            click.secho(value, fg="green")
 
 
 @click.group()
