@@ -10,15 +10,9 @@ This change log uses principles from `keep a changelog <http://keepachangelog.co
 Added
 ^^^^^
 
-- Added ``-f/--format`` option to ``dtool summary`` command to enable output in
-  JSON format
-- Added sorting of CSV/TSV/HTML inventories by dataset name
-
 
 Changed
 ^^^^^^^
-
-- Changed default output of ``dtool summary`` to be human readable YAML
 
 
 Deprecated
@@ -33,9 +27,26 @@ Fixed
 ^^^^^
 
 
-
 Security
 ^^^^^^^^
+
+
+[0.13.0] - 2018-11-21
+---------------------
+
+Added
+^^^^^
+
+- Added ``-f/--format`` option to ``dtool summary`` command to enable output in
+  JSON format
+- Added sorting of CSV/TSV/HTML inventories by dataset name
+
+
+Changed
+^^^^^^^
+
+- Changed default output of ``dtool summary`` to be human readable YAML
+
 
 [0.12.0] - 2018-09-25
 ---------------------
