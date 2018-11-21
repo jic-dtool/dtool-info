@@ -10,9 +10,14 @@ This change log uses principles from `keep a changelog <http://keepachangelog.co
 Added
 ^^^^^
 
+- Added ``-f/--format`` option to ``dtool summary`` command to enable output in
+  JSON format
+
 
 Changed
 ^^^^^^^
+
+- Changed default output of ``dtool summary`` to be human readable YAML
 
 
 Deprecated
