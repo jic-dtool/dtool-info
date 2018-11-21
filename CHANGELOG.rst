@@ -12,6 +12,7 @@ Added
 
 - Added ``-f/--format`` option to ``dtool summary`` command to enable output in
   JSON format
+- Added sorting of CSV/TSV/HTML inventories by dataset name
 
 
 Changed
@@ -30,6 +31,7 @@ Removed
 
 Fixed
 ^^^^^
+
 
 
 Security

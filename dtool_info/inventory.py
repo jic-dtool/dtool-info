@@ -64,6 +64,7 @@ def _base_uri_info(base_uri):
 
     info["total_size_str"] = sizeof_fmt(info["total_size_int"])
     info["num_datasets"] = len(info["datasets"])
+    info["datasets"] = sorted(info["datasets"], key=itemgetter("name"))
 
     return info
 
