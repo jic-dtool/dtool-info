@@ -16,6 +16,7 @@ from dtoolcore.compare import (
 )
 
 from dtool_cli.cli import (
+    base_dataset_uri_argument,
     dataset_uri_argument,
     dataset_uri_validation,
     CONFIG_PATH,
@@ -392,6 +393,20 @@ def verify(full, dataset_uri):
         sys.exit(1)
     else:
         click.secho("All good :)", fg="green")
+
+
+@click.command()
+@base_dataset_uri_argument
+def status(dataset_uri):
+    """Return dataset status (frozen or proto)."""
+    try:
+        dtoolcore.DataSet.from_uri(
+            uri=dataset_uri,
+            config_path=CONFIG_PATH
+        )
+        click.secho("frozen", fg="green")
+    except dtoolcore.DtoolCoreTypeError:
+        click.secho("proto", fg="red")
 
 
 @click.command()

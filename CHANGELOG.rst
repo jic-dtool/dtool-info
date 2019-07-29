@@ -10,6 +10,8 @@ This change log uses principles from `keep a changelog <http://keepachangelog.co
 Added
 ^^^^^
 
+- Added ``dtool status`` command for working out if a dataset is frozen or not
+
 
 Changed
 ^^^^^^^

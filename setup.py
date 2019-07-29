@@ -32,6 +32,7 @@ setup(
             "verify=dtool_info.dataset:verify",
             "overlay=dtool_info.overlay:overlay",
             "inventory=dtool_info.inventory:inventory",
+            "status=dtool_info.dataset:status",
             "uuid=dtool_info.dataset:uuid",
         ],
     },
