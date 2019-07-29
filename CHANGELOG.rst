@@ -11,6 +11,8 @@ Added
 ^^^^^
 
 - Added ``dtool status`` command for working out if a dataset is frozen or not
+- Added ``dtool uri`` command for expanding absolute and relative paths into
+  proper URIs
 
 
 Changed
