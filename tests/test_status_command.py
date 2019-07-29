@@ -1,4 +1,4 @@
-"""Test the `dtool identifiers` command."""
+"""Test the `dtool status` command."""
 
 import os
 
