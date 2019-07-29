@@ -410,6 +410,26 @@ def status(dataset_uri):
 
 
 @click.command()
+@base_dataset_uri_argument
+def uri(dataset_uri):
+    """Return full dataset URI.
+
+    Can be useful when working with absolute and relative paths.
+    """
+    try:
+        ds = dtoolcore.DataSet.from_uri(
+            uri=dataset_uri,
+            config_path=CONFIG_PATH
+        )
+    except dtoolcore.DtoolCoreTypeError:
+        ds = dtoolcore.ProtoDataSet.from_uri(
+            uri=dataset_uri,
+            config_path=CONFIG_PATH
+        )
+    click.secho(ds.uri)
+
+
+@click.command()
 @dataset_uri_argument
 def uuid(dataset_uri):
     """Return the UUID of the dataset."""

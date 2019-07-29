@@ -33,6 +33,7 @@ setup(
             "overlay=dtool_info.overlay:overlay",
             "inventory=dtool_info.inventory:inventory",
             "status=dtool_info.dataset:status",
+            "uri=dtool_info.dataset:uri",
             "uuid=dtool_info.dataset:uuid",
         ],
     },
