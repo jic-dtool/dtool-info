@@ -10,10 +10,6 @@ This change log uses principles from `keep a changelog <http://keepachangelog.co
 Added
 ^^^^^
 
-- Added ``dtool status`` command for working out if a dataset is frozen or not
-- Added ``dtool uri`` command for expanding absolute and relative paths into
-  proper URIs
-
 
 Changed
 ^^^^^^^
@@ -33,6 +29,17 @@ Fixed
 
 Security
 ^^^^^^^^
+
+
+[0.14.0] - 2019-08-06
+---------------------
+
+Added
+^^^^^
+
+- Added ``dtool status`` command for working out if a dataset is frozen or not
+- Added ``dtool uri`` command for expanding absolute and relative paths into
+  proper URIs
 
 
 [0.13.0] - 2018-11-21
