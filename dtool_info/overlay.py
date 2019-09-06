@@ -19,15 +19,25 @@ from dtool_cli.cli import (
 @click.group()
 def overlay():
     """
-    Get information about item metadata stored in overlays.
+    DEPRECATED: Get information about item metadata stored in overlays.
     """
+    click.secho(
+        "The ``dtool overlay`` command is deprecated",
+        fg="red",
+        err=True
+    )
+    click.secho(
+        "Use ``dtool overlays`` instead",
+        fg="red",
+        err=True
+    )
 
 
 @overlay.command()
 @dataset_uri_argument
 def ls(dataset_uri):
     """
-    List the overlays in the dataset.
+    DEPRECATED: List the overlays in the dataset.
     """
     dataset = dtoolcore.DataSet.from_uri(dataset_uri)
     for overlay_name in dataset.list_overlay_names():
@@ -39,7 +49,7 @@ def ls(dataset_uri):
 @click.argument("overlay_name")
 def show(dataset_uri, overlay_name):
     """
-    Show the content of a specific overlay.
+    DEPRECATED: Show the content of a specific overlay.
     """
     dataset = dtoolcore.DataSet.from_uri(dataset_uri)
     try:
