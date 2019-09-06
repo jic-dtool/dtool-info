@@ -30,6 +30,14 @@ Fixed
 Security
 ^^^^^^^^
 
+[0.15.0] - 2019-09-06
+---------------------
+
+Deprecated
+^^^^^^^^^^
+
+- Deprecated the ``dtool overlay`` command, use ``dtool overlays`` instead.
+  See also: https://github.com/jic-dtool/dtool-overlay
 
 [0.14.0] - 2019-08-06
 ---------------------
