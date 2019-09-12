@@ -2,6 +2,8 @@
 
 import sys
 
+from operator import itemgetter
+
 import click
 
 import pygments
@@ -104,17 +106,26 @@ def _list_dataset_items(uri, quiet, verbose):
             err=True
         )
         sys.exit(1)
+
+    content = []
     for i in dataset.identifiers:
         props = dataset.item_properties(i)
-        line = "{}  {}".format(i, props["relpath"])
+        content.append({
+            "identifier": i,
+            "relpath": props["relpath"],
+            "size_in_bytes": props["size_in_bytes"]
+        })
+
+    for c in sorted(content, key=itemgetter("relpath")):
+        line = "{}  {}".format(c["identifier"], c["relpath"])
         if verbose:
             line = "{}{}  {}".format(
-                i,
-                sizeof_fmt(props["size_in_bytes"]),
-                props["relpath"]
+                c["identifier"],
+                sizeof_fmt(c["size_in_bytes"]),
+                c["relpath"]
             )
         if quiet:
-            line = props["relpath"]
+            line = c["relpath"]
         click.secho(line)
 
 

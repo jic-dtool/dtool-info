@@ -10,6 +10,8 @@ This change log uses principles from `keep a changelog <http://keepachangelog.co
 Added
 ^^^^^
 
+- Added sorting of items by relpath to 'dtool ls <DS_URI>'
+
 
 Changed
 ^^^^^^^
