@@ -10,14 +10,9 @@ This change log uses principles from `keep a changelog <http://keepachangelog.co
 Added
 ^^^^^
 
-- Added sorting of items by relpath to 'dtool ls <DS_URI>'
-
 
 Changed
 ^^^^^^^
-
-- Changed formatting of 'dtool ls <DS_URI>' from using two whitespaces to using
-  one tab to make it easier to work with command line tools such as ``cut``
 
 
 Deprecated
@@ -34,6 +29,22 @@ Fixed
 
 Security
 ^^^^^^^^
+
+
+[0.16.0] - 2019-09-12
+---------------------
+
+Added
+^^^^^
+
+- Added sorting of items by relpath to 'dtool ls <DS_URI>'
+
+
+Changed
+^^^^^^^
+
+- Changed formatting of 'dtool ls <DS_URI>' from using two whitespaces to using
+  one tab to make it easier to work with command line tools such as ``cut``
 
 
 [0.15.0] - 2019-09-06
