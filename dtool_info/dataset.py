@@ -117,7 +117,7 @@ def _list_dataset_items(uri, quiet, verbose):
         })
 
     for c in sorted(content, key=itemgetter("relpath")):
-        line = "{}  {}".format(c["identifier"], c["relpath"])
+        line = "{}\t{}".format(c["identifier"], c["relpath"])
         if verbose:
             line = "{}{}  {}".format(
                 c["identifier"],

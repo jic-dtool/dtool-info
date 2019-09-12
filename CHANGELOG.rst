@@ -16,6 +16,9 @@ Added
 Changed
 ^^^^^^^
 
+- Changed formatting of 'dtool ls <DS_URI>' from using two whitespaces to using
+  one tab to make it easier to work with command line tools such as ``cut``
+
 
 Deprecated
 ^^^^^^^^^^
@@ -31,6 +34,7 @@ Fixed
 
 Security
 ^^^^^^^^
+
 
 [0.15.0] - 2019-09-06
 ---------------------
