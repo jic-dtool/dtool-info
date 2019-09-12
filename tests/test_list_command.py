@@ -54,7 +54,7 @@ def test_dataset_ls_dataset_content_functional():
     lion_ds = DataSet.from_uri(lion_dataset_uri)
     for i in lion_ds.identifiers:
         props = lion_ds.item_properties(i)
-        line = "{}  {}".format(i, props["relpath"])
+        line = "{}\t{}".format(i, props["relpath"])
         expected_lines.append(line)
 
     runner = CliRunner()
