@@ -26,6 +26,9 @@ Removed
 Fixed
 ^^^^^
 
+- Fixed defect where 'dtool verify' calculated hashes even when the '-f/--full'
+  option was not specified. The 'dtool verify' command now runs more quickly.
+
 
 Security
 ^^^^^^^^

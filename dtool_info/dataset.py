@@ -357,14 +357,24 @@ def verify(full, dataset_uri):
     dataset = dtoolcore.DataSet.from_uri(dataset_uri)
     all_okay = True
 
-    generated_manifest = dataset.generate_manifest()
-    generated_identifiers = set(generated_manifest["items"].keys())
+    # Generate identifiers and sizes quickly without the
+    # hash calculation used when calling dataset.generate_manifest().
+    generated_sizes = {}
+    generated_relpaths = {}
+    for handle in dataset._storage_broker.iter_item_handles():
+        identifier = dtoolcore.utils.generate_identifier(handle)
+        size = dataset._storage_broker.get_size_in_bytes(handle)
+        relpath = dataset._storage_broker.get_relpath(handle)
+        generated_sizes[identifier] = size
+        generated_relpaths[identifier] = relpath
+
+    generated_identifiers = set(generated_sizes.keys())
     manifest_identifiers = set(dataset.identifiers)
 
     for i in generated_identifiers.difference(manifest_identifiers):
         message = "Unknown item: {} {}".format(
             i,
-            generated_manifest["items"][i]["relpath"]
+            generated_relpaths[i]
         )
         click.secho(message, fg="red")
         all_okay = False
@@ -378,9 +388,9 @@ def verify(full, dataset_uri):
         all_okay = False
 
     for i in manifest_identifiers.intersection(generated_identifiers):
-        generated_hash = generated_manifest["items"][i]["size_in_bytes"]
-        manifest_hash = dataset.item_properties(i)["size_in_bytes"]
-        if generated_hash != manifest_hash:
+        generated_size = generated_sizes[i]
+        manifest_size = dataset.item_properties(i)["size_in_bytes"]
+        if generated_size != manifest_size:
             message = "Altered item size: {} {}".format(
                 i,
                 dataset.item_properties(i)["relpath"]
@@ -389,6 +399,7 @@ def verify(full, dataset_uri):
             all_okay = False
 
     if full:
+        generated_manifest = dataset.generate_manifest()
         for i in manifest_identifiers.intersection(generated_identifiers):
             generated_hash = generated_manifest["items"][i]["hash"]
             manifest_hash = dataset.item_properties(i)["hash"]
