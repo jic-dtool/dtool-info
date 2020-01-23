@@ -26,12 +26,18 @@ Removed
 Fixed
 ^^^^^
 
-- Fixed defect where 'dtool verify' calculated hashes even when the '-f/--full'
-  option was not specified. The 'dtool verify' command now runs more quickly.
-
 
 Security
 ^^^^^^^^
+
+[0.16.1] - 2020-01-23
+---------------------
+
+Fixed
+^^^^^
+
+- Fixed defect where 'dtool verify' calculated hashes even when the '-f/--full'
+  option was not specified. The 'dtool verify' command now runs more quickly.
 
 
 [0.16.0] - 2019-09-12
