@@ -30,6 +30,16 @@ Fixed
 Security
 ^^^^^^^^
 
+
+[0.16.2] - 2021-06-23
+---------------------
+
+Fixed
+^^^^^
+
+- Licence file now included in release thanks to Jan Janssen (https://github.com/jan-janssen)
+
+
 [0.16.1] - 2020-01-23
 ---------------------
 
