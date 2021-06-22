@@ -1,3 +1,3 @@
 """dtool_info package."""
 
-__version__ = "0.16.1"
+__version__ = "0.16.2"
