@@ -5,12 +5,8 @@ dtool CLI commands for getting information about datasets
    :target: http://badge.fury.io/py/dtool-info
    :alt: PyPi package
 
-.. image:: https://travis-ci.org/jic-dtool/dtool-info.svg?branch=master
-   :target: https://travis-ci.org/jic-dtool/dtool-info
-   :alt: Travis CI build status (Linux)
-
-.. image:: https://codecov.io/github/jic-dtool/dtool-info/coverage.svg?branch=master
-   :target: https://codecov.io/github/jic-dtool/dtool-info?branch=master
+.. image:: https://codecov.io/github/jic-dtool/dtool-info/coverage.svg?branch=main
+   :target: https://codecov.io/github/jic-dtool/dtool-info?branch=main
    :alt: Code Coverage
 
 
