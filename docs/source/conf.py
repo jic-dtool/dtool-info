@@ -54,7 +54,7 @@ repo_name = "dtool_info"
 # built documents.
 #
 # The short X.Y version.
-version = "0.16.2"
+version = "0.16.3"
 # The full version, including alpha/beta/rc tags.
 release = version
 
