@@ -1,0 +1,47 @@
+[build-system]
+requires = ["hatchling>=1.27", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "dtool-info"
+description = "Dtool plugin for getting information about datasets"
+readme = "README.rst"
+license = "MIT"
+license-files = ["LICENSE.rst"]
+authors = [
+    {name = "Tjelvar Olsson", email = "tjelvar.olsson@gmail.com"},
+]
+requires-python = ">=3.10"
+dynamic = ["version"]
+dependencies = [
+    "click",
+    "dtoolcore>=3.0.0",
+    "dtool-cli>=0.7.2",
+    "jinja2",
+    "pygments",
+]
+
+[project.urls]
+Repository = "https://github.com/jic-dtool/dtool-info"
+
+[project.entry-points."dtool.cli"]
+diff = "dtool_info.dataset:diff"
+ls = "dtool_info.dataset:ls"
+summary = "dtool_info.dataset:summary"
+item = "dtool_info.dataset:item"
+identifiers = "dtool_info.dataset:identifiers"
+verify = "dtool_info.dataset:verify"
+overlay = "dtool_info.overlay:overlay"
+inventory = "dtool_info.inventory:inventory"
+status = "dtool_info.dataset:status"
+uri = "dtool_info.dataset:uri"
+uuid = "dtool_info.dataset:uuid"
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.version.raw-options]
+local_scheme = "no-local-version"
+
+[tool.hatch.build.targets.wheel]
+packages = ["dtool_info"]

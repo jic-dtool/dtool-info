@@ -5,6 +5,10 @@ dtool CLI commands for getting information about datasets
    :target: http://badge.fury.io/py/dtool-info
    :alt: PyPi package
 
+.. image:: https://github.com/jic-dtool/dtool-info/actions/workflows/test.yml/badge.svg?branch=main
+   :target: https://github.com/jic-dtool/dtool-info/actions/workflows/test.yml
+   :alt: Tests
+
 .. image:: https://codecov.io/github/jic-dtool/dtool-info/coverage.svg?branch=main
    :target: https://codecov.io/github/jic-dtool/dtool-info?branch=main
    :alt: Code Coverage
